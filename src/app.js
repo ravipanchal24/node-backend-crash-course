@@ -6,15 +6,15 @@ const { errorHandler } = require("./middleware/errorHandler");
 
 const app = express();
 
-app.use(errorHandler);
-app.use(logger);
 app.use(cors());
 app.use(express.json());
+app.use(logger);
 
 app.use("/tasks", taskRoutes);
 
 app.get("/health", (req, res) => {
-  res.json({ status: "ok" });
+  res.json({ status: "ok", message: "Server is running" });
 });
 
+app.use(errorHandler);
 module.exports = app;
