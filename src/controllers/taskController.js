@@ -15,9 +15,16 @@ exports.getTaskById = (req, res) => {
 };
 
 exports.createTask = (req, res) => {
+  const { title } = req.body.title;
+  if (!title) {
+    return res.status(400).json({
+      message: "Title is required",
+    });
+  }
+
   const newTask = {
     id: Date.now(),
-    title: req.body.title,
+    title,
   };
 
   tasks.push(newTask);
